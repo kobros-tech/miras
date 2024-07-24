@@ -55,7 +55,7 @@
 
                 <!-- start of row -->
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-12">
                         <h2 class="mt-4" style="color: #8F4B0E">
                             <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
                             <span t-elif="doc.state in ['draft','sent']">Quotation # </span>
@@ -63,11 +63,18 @@
                             <span t-field="doc.name">SO0000</span>
                         </h2>
                     </div>
-                    <div class="col-4">
-                        <h3 class="mt-4"><span t-field="doc.partner_id.name"></span></h3>
-                        <h4><span t-field="doc.partner_id.country_id.name"></span></h4>
+                </div><!-- end of row -->
+
+                <!-- start of row -->
+                <div class="row">
+                    <div class="col-12">
+                        <h6 class="mt-4"><span>Customer Name:</span><span class="mx-4"/><span t-field="doc.partner_id.name"></span></h6>
+                        <h6 t-if="doc.partner_id.country_id.name"><span>Country Name:</span><span class="mx-4"/><span t-field="doc.partner_id.country_id.name"></span></h6>
+                        <h6 t-if="doc.partner_id.email"><span>Email:</span><span class="mx-4"/><span t-field="doc.partner_id.email"></span></h6>
+                        <h6 t-if="doc.partner_id.phone"><span>Phone Number:</span><span class="mx-4"/><span t-field="doc.partner_id.phone"></span></h6>
+                        <h6 t-if="doc.kind_attention"><span>Kind Attention:</span><span class="mx-4"/><span t-field="doc.kind_attention"></span></h6>
+                        <h6 t-if="doc.message"><span t-field="doc.message"></span></h6>
                     </div>
-                    <div class="col-4"></div>
                 </div><!-- end of row -->
 
                 <!-- start of row -->
@@ -213,17 +220,65 @@
                                     <span class="pt-5"/><br/>
                                     <span class="pt-5"/><br/>
                                     <span t-field="doc.note" t-attf-style="#{'text-align:justify;text-justify:inter-word;' if doc.company_id.terms_type != 'html' else ''}" name="order_note"/>
+                                    <p t-if="not is_html_empty(doc.payment_term_id.note)">
+                                        <span t-field="doc.payment_term_id.note">The payment should also be transmitted with love</span>
+                                    </p>
+                                    <p t-if="doc.fiscal_position_id and not is_html_empty(doc.fiscal_position_id.sudo().note)"
+                                        id="fiscal_position_remark">
+                                        <strong>Fiscal Position Remark:</strong>
+                                        <span t-field="doc.fiscal_position_id.sudo().note">No further requirements for this payment</span>
+                                    </p>
+
+                                    <div class="row">
+                                        <div class="col-6" style="border: 1px solid black;">Beneficiary Name For Cheques or Wire Transfer</div>
+                                        <div class="col-6" style="border: 1px solid black;">Miras Law Firm and Legal Consultations</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6" style="border: 1px solid black;">Bank</div>
+                                        <div class="col-6" style="border: 1px solid black;">Kuwait Finance House.</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6" style="border: 1px solid black;">Account Number</div>
+                                        <div class="col-6" style="border: 1px solid black;"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6" style="border: 1px solid black;">Iban</div>
+                                        <div class="col-6" style="border: 1px solid black;">KW75 KFHO 000 000 0000 591010009488</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6" style="border: 1px solid black;">Swift Code</div>
+                                        <div class="col-6" style="border: 1px solid black;">KFHOKWKW</div>
+                                    </div>
+                                    <div class="row">
+                                        <p>For you have any enquiry please do not hesitate to contact us on our email accounts@miraslegal.com.</p>
+                                    </div>
                                 </td>
+                                
+
+                                <!-- <tr>
+                                    <td style="border: 1px solid black;">Beneficiary Name For Cheques or Wire Transfer</td>
+                                    <td style="border: 1px solid black;">Miras Law Firm and Legal Consultations</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">Bank</td>
+                                    <td style="border: 1px solid black;">Kuwait Finance House.</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">Account Number</td>
+                                    <td style="border: 1px solid black;"></td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">Iban</td>
+                                    <td style="border: 1px solid black;">KW75 KFHO 000 000 0000 591010009488</td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1px solid black;">Swift Code</td>
+                                    <td style="border: 1px solid black;">KFHOKWKW</td>
+                                </tr> -->
+
                             </tr>
                         </table>
-                        <p t-if="not is_html_empty(doc.payment_term_id.note)">
-                            <span t-field="doc.payment_term_id.note">The payment should also be transmitted with love</span>
-                        </p>
-                        <p t-if="doc.fiscal_position_id and not is_html_empty(doc.fiscal_position_id.sudo().note)"
-                            id="fiscal_position_remark">
-                            <strong>Fiscal Position Remark:</strong>
-                            <span t-field="doc.fiscal_position_id.sudo().note">No further requirements for this payment</span>
-                        </p>
+                        
                     </div>
                 </div>
             </div>
