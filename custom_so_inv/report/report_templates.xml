@@ -40,18 +40,37 @@
                 </div>
             </div> -->
             
-            <div class="row">
-                <div class="col-12 text-center">
-                    <div class="float-center text-center">
-                        <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" alt="Logo"/>
+            <!-- for sale order report -->
+            <!-- <t t-if="doc">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="float-center text-center">
+                            <img t-if="doc.company_id.logo" t-att-src="image_data_uri(doc.company_id.logo)" alt="Logo"/>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row zero_min_height">
-                <div class="col-12">
-                    <div style="border-bottom: 1px solid black;"/>
+                <div class="row zero_min_height">
+                    <div class="col-12">
+                        <div style="border-bottom: 1px solid black;"/>
+                    </div>
                 </div>
-            </div>
+            </t> -->
+
+            <!-- for invoice report -->
+            <t t-if="o">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <div class="float-center text-center">
+                            <img t-if="o.company_id.logo" t-att-src="image_data_uri(o.company_id.logo)" alt="Logo"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row zero_min_height">
+                    <div class="col-12">
+                        <div style="border-bottom: 1px solid black;"/>
+                    </div>
+                </div>
+            </t>
         </div>
 
         <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout {{  'o_report_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' if company.layout_background == 'Geometric' else ''}});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">

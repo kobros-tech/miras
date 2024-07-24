@@ -5,7 +5,7 @@
             
         <!--Total amount with all taxes-->
         <tr class="border-black o_total" style="background: #BD7E3C; color: #FFF;">
-            <td><strong>Total</strong></td>
+            <td><strong style="color: #FFF;">Total</strong></td>
             <td  class="text-end">
                 <span t-out="tax_totals['formatted_amount_total']">31.05</span>
             </td>
@@ -50,6 +50,8 @@
             <span class="pt-5"/><br/>
             <span class="pt-5"/><br/>
             <span class="pt-5"/><br/>
+
+            <!-- start of page -->
             <div class="page">
                 <div class="oe_structure"/>
 
@@ -211,6 +213,23 @@
                     <div id="total" class="row" name="total">
                         <div t-attf-class="#{'col-6' if report_type != 'html' else 'col-sm-7 col-md-6'} ms-auto">
                             <table class="table table-sm table-borderless">
+                                
+                                
+                                <!-- total discount -->
+                                <tr class="border-black o_total">
+                                    <t t-set="lines_to_report" t-value="doc._get_order_lines_to_report()"/>
+                                    <t t-set="total_discount" t-value="0"/>
+                                    <t t-foreach="lines_to_report" t-as="line">
+                                        <t t-set="total_discount" t-value="line.discount + total_discount"/>
+                                    </t>
+                                    <td><strong>Discount%</strong></td>
+                                    <td class="text-end"><p><span t-out="total_discount"/> %</p></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Discount</strong></td>
+                                    <td class="text-end"><p><span t-out="total_discount * doc.tax_totals['amount_total'] / 100"/></p></td>
+                                </tr>
+                                
                                 <!-- Tax totals -->
                                 <t t-set="tax_totals" t-value="doc.tax_totals"/>
                                 <t t-call="custom_so_inv.custom_document_tax_totals_template"/>
@@ -232,8 +251,9 @@
                         <span t-field="doc.signed_by">Oscar Morgan</span>
                     </div>
                 </div>
-            </div>
+            </div><!-- end of page -->
 
+            <!-- start of footer -->
             <div class="page-footer">
                 <div class="row">
                     <div class="col">
@@ -284,7 +304,7 @@
                         
                     </div>
                 </div>
-            </div>
+            </div><!-- end of footer -->
         </t>
     </template>
 

@@ -39,5 +39,7 @@
         "report/report_templates.xml",
         "report/ir_actions_report_templates.xml",
         "report/ir_actions_report.xml",
+        "report/report_invoice.xml",
+        "report/account_report.xml",
     ],
 }
