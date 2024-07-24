@@ -65,17 +65,43 @@
                     </div>
                 </div><!-- end of row -->
 
-                <!-- start of row -->
-                <div class="row">
-                    <div class="col-12">
-                        <h6 class="mt-4"><span>Customer Name:</span><span class="mx-4"/><span t-field="doc.partner_id.name"></span></h6>
-                        <h6 t-if="doc.partner_id.country_id.name"><span>Country Name:</span><span class="mx-4"/><span t-field="doc.partner_id.country_id.name"></span></h6>
-                        <h6 t-if="doc.partner_id.email"><span>Email:</span><span class="mx-4"/><span t-field="doc.partner_id.email"></span></h6>
-                        <h6 t-if="doc.partner_id.phone"><span>Phone Number:</span><span class="mx-4"/><span t-field="doc.partner_id.phone"></span></h6>
-                        <h6 t-if="doc.kind_attention"><span>Kind Attention:</span><span class="mx-4"/><span t-field="doc.kind_attention"></span></h6>
-                        <h6 t-if="doc.message"><span t-field="doc.message"></span></h6>
-                    </div>
-                </div><!-- end of row -->
+                
+                <!-- <div class="row"> -->
+                    <!-- <div class="col-12"> -->
+                        <!-- <h6 class="mt-4"><span>Customer Name:</span><span class="mx-4"/><span t-field="doc.partner_id.name"></span></h6> -->
+                        <!-- <h6 t-if="doc.partner_id.country_id.name"><span>Country Name:</span><span class="mx-4"/><span t-field="doc.partner_id.country_id.name"></span></h6> -->
+                        <!-- <h6 t-if="doc.partner_id.email"><span>Email:</span><span class="mx-4"/><span t-field="doc.partner_id.email"></span></h6> -->
+                        <!-- <h6 t-if="doc.partner_id.phone"><span>Phone Number:</span><span class="mx-4"/><span t-field="doc.partner_id.phone"></span></h6> -->
+                        <!-- <h6 t-if="doc.kind_attention"><span>Kind Attention:</span><span class="mx-4"/><span t-field="doc.kind_attention"></span></h6> -->
+                        <!-- <h6 t-if="doc.message"><span t-field="doc.message"></span></h6> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+                
+
+                <!-- start of row set -->
+                <div class="row mt-4">
+                    <div class="col-2"><h6>Customer Name:</h6></div>
+                    <div class="col-10"><h6 t-field="doc.partner_id.name"></h6></div>
+                </div>
+                <div class="row" t-if="doc.partner_id.country_id.name">
+                    <div class="col-2"><h6>Country Name:</h6></div>
+                    <div class="col-10"><h6 t-field="doc.partner_id.country_id.name"></h6></div>
+                </div>
+                <div class="row" t-if="doc.partner_id.email">
+                    <div class="col-2"><h6>Email:</h6></div>
+                    <div class="col-10"><h6 t-field="doc.partner_id.email"></h6></div>
+                </div>
+                <div class="row" t-if="doc.partner_id.phone">
+                    <div class="col-2"><h6>Phone Number:</h6></div>
+                    <div class="col-10"><h6 t-field="doc.partner_id.phone"></h6></div>
+                </div>
+                <div class="row" t-if="doc.kind_attention">
+                    <div class="col-2"><h6>Kind Attention:</h6></div>
+                    <div class="col-10"><h6 t-field="doc.kind_attention"></h6></div>
+                </div>
+                <div class="row" t-if="doc.message">
+                    <div class="col-12"><h6 t-field="doc.message"></h6></div>
+                </div><!-- end of row set -->
 
                 <!-- start of row -->
                 <div class="row mt-4 mb-2" id="informations">
@@ -110,12 +136,12 @@
                     <thead style="display: table-row-group">
                         <tr>
                             <th name="th_description" class="text-start" style="color: #8F4B0E">Description</th>
-                            <th name="th_quantity" class="text-end" style="color: #8F4B0E">Quantity</th>
-                            <th name="th_priceunit" class="text-end" style="color: #8F4B0E">Unit Price</th>
-                            <th name="th_discount" t-if="display_discount" class="text-end" style="color: #8F4B0E">
+                            <!-- <th name="th_quantity" class="text-end" style="color: #8F4B0E">Quantity</th> -->
+                            <!-- <th name="th_priceunit" class="text-end" style="color: #8F4B0E">Unit Price</th> -->
+                            <!-- <th name="th_discount" t-if="display_discount" class="text-end" style="color: #8F4B0E">
                                 <span>Disc.%</span>
-                            </th>
-                            <th name="th_taxes" class="text-end" style="color: #8F4B0E">Taxes</th>
+                            </th> -->
+                            <!-- <th name="th_taxes" class="text-end" style="color: #8F4B0E">Taxes</th> -->
                             <th name="th_subtotal" class="text-end" style="color: #8F4B0E">
                                 <span>Amount</span>
                             </th>
@@ -132,23 +158,23 @@
                             <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
                                 <t t-if="not line.display_type">
                                     <td name="td_name"><span t-field="line.name">Bacon Burger</span></td>
-                                    <td name="td_quantity" class="text-end">
+                                    <!-- <td name="td_quantity" class="text-end">
                                         <span t-field="line.product_uom_qty">3</span>
                                         <span t-field="line.product_uom">units</span>
                                         <span t-if="line.product_packaging_id">
                                             (<span t-field="line.product_packaging_qty" t-options='{"widget": "integer"}'/> <span t-field="line.product_packaging_id"/>)
                                         </span>
-                                    </td>
-                                    <td name="td_priceunit" class="text-end">
+                                    </td> -->
+                                    <!-- <td name="td_priceunit" class="text-end">
                                         <span t-field="line.price_unit">3</span>
-                                    </td>
-                                    <td t-if="display_discount" class="text-end">
+                                    </td> -->
+                                    <!-- <td t-if="display_discount" class="text-end">
                                         <span t-field="line.discount">-</span>
-                                    </td>
+                                    </td> -->
                                     <t t-set="taxes" t-value="', '.join([(tax.invoice_label or tax.name) for tax in line.tax_id])"/>
-                                    <td name="td_taxes" t-attf-class="text-end {{ 'text-nowrap' if len(taxes) &lt; 10 else '' }}">
+                                    <!-- <td name="td_taxes" t-attf-class="text-end {{ 'text-nowrap' if len(taxes) &lt; 10 else '' }}">
                                         <span t-out="taxes">Tax 15%</span>
-                                    </td>
+                                    </td> -->
                                     <td t-if="not line.is_downpayment" name="td_subtotal" class="text-end o_price_total">
                                         <span t-field="line.price_subtotal">27.00</span>
                                     </td>
@@ -229,53 +255,30 @@
                                         <span t-field="doc.fiscal_position_id.sudo().note">No further requirements for this payment</span>
                                     </p>
 
-                                    <div class="row">
-                                        <div class="col-6" style="border: 1px solid black;">Beneficiary Name For Cheques or Wire Transfer</div>
-                                        <div class="col-6" style="border: 1px solid black;">Miras Law Firm and Legal Consultations</div>
+                                    <div class="row" style="height: 50px;">
+                                        <div class="col-6" style="border: 1px solid black;"><p class="my-2 mx-2">Beneficiary Name For Cheques or Wire Transfer</p></div>
+                                        <div class="col-6" style="border: 1px solid black;"><p class="my-2 mx-2">Miras Law Firm and Legal Consultations</p></div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6" style="border: 1px solid black;">Bank</div>
-                                        <div class="col-6" style="border: 1px solid black;">Kuwait Finance House.</div>
+                                    <div class="row" style="height: 50px;">
+                                        <div class="col-6" style="border: 1px solid black;"><p class="my-2 mx-2">Bank</p></div>
+                                        <div class="col-6" style="border: 1px solid black;"><p class="my-2 mx-2">Kuwait Finance House.</p></div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6" style="border: 1px solid black;">Account Number</div>
+                                    <div class="row" style="height: 50px;">
+                                        <div class="col-6" style="border: 1px solid black;"><p class="my-2 mx-2">Account Number</p></div>
                                         <div class="col-6" style="border: 1px solid black;"></div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6" style="border: 1px solid black;">Iban</div>
-                                        <div class="col-6" style="border: 1px solid black;">KW75 KFHO 000 000 0000 591010009488</div>
+                                    <div class="row" style="height: 50px;">
+                                        <div class="col-6" style="border: 1px solid black;"><p class="my-2 mx-2">Iban</p></div>
+                                        <div class="col-6" style="border: 1px solid black;"><p class="my-2 mx-2">KW75 KFHO 000 000 0000 591010009488</p></div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-6" style="border: 1px solid black;">Swift Code</div>
-                                        <div class="col-6" style="border: 1px solid black;">KFHOKWKW</div>
+                                    <div class="row" style="height: 50px;">
+                                        <div class="col-6" style="border: 1px solid black;"><p class="my-2 mx-2">Swift Code</p></div>
+                                        <div class="col-6" style="border: 1px solid black;"><p class="my-2 mx-2">KFHOKWKW</p></div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" style="height: 50px;">
                                         <p>For you have any enquiry please do not hesitate to contact us on our email accounts@miraslegal.com.</p>
                                     </div>
                                 </td>
-                                
-
-                                <!-- <tr>
-                                    <td style="border: 1px solid black;">Beneficiary Name For Cheques or Wire Transfer</td>
-                                    <td style="border: 1px solid black;">Miras Law Firm and Legal Consultations</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: 1px solid black;">Bank</td>
-                                    <td style="border: 1px solid black;">Kuwait Finance House.</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: 1px solid black;">Account Number</td>
-                                    <td style="border: 1px solid black;"></td>
-                                </tr>
-                                <tr>
-                                    <td style="border: 1px solid black;">Iban</td>
-                                    <td style="border: 1px solid black;">KW75 KFHO 000 000 0000 591010009488</td>
-                                </tr>
-                                <tr>
-                                    <td style="border: 1px solid black;">Swift Code</td>
-                                    <td style="border: 1px solid black;">KFHOKWKW</td>
-                                </tr> -->
-
                             </tr>
                         </table>
                         
