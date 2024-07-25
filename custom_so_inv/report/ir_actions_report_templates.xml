@@ -140,9 +140,15 @@
                             <th name="th_description" class="text-start" style="color: #8F4B0E">Description</th>
                             <!-- <th name="th_quantity" class="text-end" style="color: #8F4B0E">Quantity</th> -->
                             <!-- <th name="th_priceunit" class="text-end" style="color: #8F4B0E">Unit Price</th> -->
-                            <!-- <th name="th_discount" t-if="display_discount" class="text-end" style="color: #8F4B0E">
+                            <th name="th_discount" t-if="display_discount" class="text-end" style="color: #8F4B0E">
                                 <span>Disc.%</span>
-                            </th> -->
+                            </th>
+                            <th name="th_discount_amount" t-if="display_discount" class="text-end" style="color: #8F4B0E">
+                                <span>Discount Amount</span>
+                            </th>
+                            <th name="th_before_discount" t-if="display_discount" class="text-end" style="color: #8F4B0E">
+                                <span>Amount before Discount</span>
+                            </th>
                             <!-- <th name="th_taxes" class="text-end" style="color: #8F4B0E">Taxes</th> -->
                             <th name="th_subtotal" class="text-end" style="color: #8F4B0E">
                                 <span>Amount</span>
@@ -170,9 +176,15 @@
                                     <!-- <td name="td_priceunit" class="text-end">
                                         <span t-field="line.price_unit">3</span>
                                     </td> -->
-                                    <!-- <td t-if="display_discount" class="text-end">
+                                    <td t-if="display_discount" class="text-end">
                                         <span t-field="line.discount">-</span>
-                                    </td> -->
+                                    </td>
+                                    <td t-if="display_discount" class="text-end">
+                                        <span t-out="(line.price_unit * line.product_uom_qty) * line.discount / 100">-</span>
+                                    </td>
+                                    <td t-if="display_discount" class="text-end">
+                                        <span t-out="(line.price_unit * line.product_uom_qty)">-</span>
+                                    </td>
                                     <t t-set="taxes" t-value="', '.join([(tax.invoice_label or tax.name) for tax in line.tax_id])"/>
                                     <!-- <td name="td_taxes" t-attf-class="text-end {{ 'text-nowrap' if len(taxes) &lt; 10 else '' }}">
                                         <span t-out="taxes">Tax 15%</span>
@@ -219,15 +231,17 @@
                                 <tr class="border-black o_total">
                                     <t t-set="lines_to_report" t-value="doc._get_order_lines_to_report()"/>
                                     <t t-set="total_discount" t-value="0"/>
+                                    <t t-set="total_discount_amount" t-value="0"/>
                                     <t t-foreach="lines_to_report" t-as="line">
                                         <t t-set="total_discount" t-value="line.discount + total_discount"/>
+                                        <t t-set="total_discount_amount" t-value="((line.price_unit * line.product_uom_qty) * line.discount / 100) + total_discount_amount"/>
                                     </t>
                                     <td><strong>Discount%</strong></td>
                                     <td class="text-end"><p><span t-out="total_discount"/> %</p></td>
                                 </tr>
                                 <tr>
                                     <td><strong>Discount</strong></td>
-                                    <td class="text-end"><p><span t-out="total_discount * doc.tax_totals['amount_total'] / 100"/></p></td>
+                                    <td class="text-end"><p><span t-out="round(total_discount_amount, 2)"/></p></td>
                                 </tr>
                                 
                                 <!-- Tax totals -->
