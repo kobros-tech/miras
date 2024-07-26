@@ -16,4 +16,5 @@ class SaleOrder(models.Model):
     message = fields.Html(
         string='Welcome message',
         default="Dear Sir, You are kindly requested to process the due amount as stated below:",
+        translate=True,
     )

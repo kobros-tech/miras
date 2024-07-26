@@ -51,8 +51,8 @@
                 <div class="mt-5 clearfix">
                     
                     <!-- start of page -->
-                    <div class="page mb-4">
-                        <h2 style="color: #8F4B0E">
+                    <div class="page mb-4" t-att-dir="'rtl' if o.partner_id.lang=='ar_001' else 'ltr'">
+                        <h2 t-att-style="'color: #8F4B0E'">
                             <span t-if="not proforma"></span>
                             <span t-else="">PROFORMA</span>
                             <span t-if="o.move_type == 'out_invoice' and o.state == 'posted'">Invoice</span>
@@ -68,18 +68,18 @@
                         <div class="oe_structure"></div>
                         <div id="informations" class="row mt-3 mb-1">
                             <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2" t-if="o.invoice_date" name="invoice_date">
-                                <t t-if="o.move_type == 'out_invoice'"><strong style="color: #8F4B0E">Invoice Date:</strong></t>
+                                <t t-if="o.move_type == 'out_invoice'"><strong t-att-style="'color: #8F4B0E'"><span>Invoice Date:</span></strong></t>
                                 <t t-elif="o.move_type == 'out_refund'"><strong>Credit Note Date:</strong></t>
                                 <t t-elif="o.move_type == 'out_receipt'"><strong>Receipt Date:</strong></t>
                                 <t t-else=""><strong>Date:</strong></t><br/>
                                 <span t-field="o.invoice_date">2023-09-12</span>
                             </div>
                             <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2" t-if="o.invoice_date_due and o.move_type == 'out_invoice' and o.state == 'posted'" name="due_date">
-                                <strong style="color: #8F4B0E">Due Date:</strong><br/>
+                                <strong t-att-style="'color: #8F4B0E'"><span>Due Date:</span></strong><br/>
                                 <span t-field="o.invoice_date_due">2023-10-31</span>
                             </div>
                             <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2" t-if="o.delivery_date" name="delivery_date">
-                                <strong style="color: #8F4B0E">Delivery Date:</strong><br/>
+                                <strong t-att-style="'color: #8F4B0E'"><span>Delivery Date:</span></strong><br/>
                                 <span t-field="o.delivery_date">2023-09-25</span>
                             </div>
                             <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2" t-if="o.invoice_origin" name="origin">
@@ -134,20 +134,20 @@
                         <table class="table table-sm o_main_table table-bordered mt-5" name="invoice_line_table">
                             <thead>
                                 <tr>
-                                    <th name="th_description" class="text-start"><span>Description</span></th>
+                                    <th name="th_description" class="text-end" t-att-style="'color: #8F4B0E'"><span>Description</span></th>
                                     <!-- <th name="th_quantity" class="text-end"><span>Quantity</span></th> -->
                                     <!-- <th name="th_priceunit" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th> -->
-                                    <th name="th_discount" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                    <th name="th_discount" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" t-att-style="'color: #8F4B0E'">
                                         <span>Disc.%</span>
                                     </th>
-                                    <th name="th_discount_amount" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                    <th name="th_discount_amount" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" t-att-style="'color: #8F4B0E'">
                                         <span>Discount Amount</span>
                                     </th>
-                                    <th name="th_before_discount" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                    <th name="th_before_discount" t-if="display_discount" t-attf-class="text-end {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" t-att-style="'color: #8F4B0E'">
                                         <span>Amount before Discount</span>
                                     </th>
                                     <!-- <th name="th_taxes" t-attf-class="text-start {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th> -->
-                                    <th name="th_subtotal" class="text-end">
+                                    <th name="th_subtotal" class="text-end" t-att-style="'color: #8F4B0E'">
                                         <span>Amount</span>
                                     </th>
                                 </tr>
@@ -346,7 +346,7 @@
                     </div><!-- end of page -->
 
                     <!-- start of footer -->
-                    <div class="page-footer">
+                    <div class="page-footer" t-att-dir="'rtl' if o.partner_id.lang=='ar_001' else 'ltr'">
                         <div class="row">
                             <div class="col">
                                 <table class="table table-borderless">

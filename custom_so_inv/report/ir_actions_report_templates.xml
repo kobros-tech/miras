@@ -5,7 +5,7 @@
             
         <!--Total amount with all taxes-->
         <tr class="border-black o_total" style="background: #BD7E3C; color: #FFF;">
-            <td><strong style="color: #FFF;">Total</strong></td>
+            <td><strong style="color: #FFF;"><span>Total</span></strong></td>
             <td  class="text-end">
                 <span t-out="tax_totals['formatted_amount_total']">31.05</span>
             </td>
@@ -52,13 +52,13 @@
             <span class="pt-5"/><br/>
 
             <!-- start of page -->
-            <div class="page">
+            <div class="page" t-att-dir="'rtl' if doc.partner_id.lang=='ar_001' else 'ltr'">
                 <div class="oe_structure"/>
 
                 <!-- start of row -->
                 <div class="row">
                     <div class="col-12">
-                        <h2 class="mt-4" style="color: #8F4B0E">
+                        <h2 class="mt-4" t-att-style="'color: #8F4B0E'">
                             <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
                             <span t-elif="doc.state in ['draft','sent']">Quotation # </span>
                             <span t-else="" >Order # </span>
@@ -113,7 +113,7 @@
                     </div>
                     <div t-if="doc.date_order" class="col-auto col-3 mw-100 mb-2" name="informations_date">
                         <strong t-if="doc.state in ['draft', 'sent']">Quotation Date:</strong>
-                        <strong t-else="" style="color: #8F4B0E">Order Date:</strong><br/>
+                        <strong t-else="" t-att-style="'color: #8F4B0E'">Order Date:</strong><br/>
                         <span class="m-0" t-field="doc.date_order" t-options='{"widget": "date"}'>2023-12-31</span>
                     </div>
                     <div t-if="doc.validity_date and doc.state in ['draft', 'sent']"
@@ -123,7 +123,7 @@
                         <span class="m-0" t-field="doc.validity_date">2023-12-31</span>
                     </div>
                     <div t-if="doc.user_id.name" class="col-auto col-3 mw-100 mb-2">
-                        <strong style="color: #8F4B0E">Salesperson:</strong><br/>
+                        <strong t-att-style="'color: #8F4B0E'"><span>Salesperson:</span></strong><br/>
                         <span class="m-0" t-field="doc.user_id">Mitchell Admin</span>
                     </div>
                 </div><!-- end of row -->
@@ -137,20 +137,20 @@
                     <!-- In case we want to repeat the header, remove "display: table-row-group" -->
                     <thead style="display: table-row-group">
                         <tr>
-                            <th name="th_description" class="text-start" style="color: #8F4B0E">Description</th>
+                            <th name="th_description" class="text-end" t-att-style="'color: #8F4B0E'">Description</th>
                             <!-- <th name="th_quantity" class="text-end" style="color: #8F4B0E">Quantity</th> -->
                             <!-- <th name="th_priceunit" class="text-end" style="color: #8F4B0E">Unit Price</th> -->
-                            <th name="th_discount" t-if="display_discount" class="text-end" style="color: #8F4B0E">
+                            <th name="th_discount" t-if="display_discount" class="text-end" t-att-style="'color: #8F4B0E'">
                                 <span>Disc.%</span>
                             </th>
-                            <th name="th_discount_amount" t-if="display_discount" class="text-end" style="color: #8F4B0E">
+                            <th name="th_discount_amount" t-if="display_discount" class="text-end" t-att-style="'color: #8F4B0E'">
                                 <span>Discount Amount</span>
                             </th>
-                            <th name="th_before_discount" t-if="display_discount" class="text-end" style="color: #8F4B0E">
+                            <th name="th_before_discount" t-if="display_discount" class="text-end" t-att-style="'color: #8F4B0E'">
                                 <span>Amount before Discount</span>
                             </th>
                             <!-- <th name="th_taxes" class="text-end" style="color: #8F4B0E">Taxes</th> -->
-                            <th name="th_subtotal" class="text-end" style="color: #8F4B0E">
+                            <th name="th_subtotal" class="text-end" t-att-style="'color: #8F4B0E'">
                                 <span>Amount</span>
                             </th>
                         </tr>
@@ -268,7 +268,7 @@
             </div><!-- end of page -->
 
             <!-- start of footer -->
-            <div class="page-footer">
+            <div class="page-footer" t-att-dir="'rtl' if doc.partner_id.lang=='ar_001' else 'ltr'">
                 <div class="row">
                     <div class="col">
                         <table class="table table-borderless">
